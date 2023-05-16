@@ -1,0 +1,38 @@
+<!-- Include jQuery UI for Autocomplete -->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<!-- Search form -->
+<form method="get">
+    <input id="search" type="text" name="search" placeholder="Search by User Name">
+    <input type="submit" value="Search">
+</form>
+
+<!-- Weapon table -->
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Serial Number</th>
+      <th>SI Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for weapon in weapons %}
+    <tr>
+      <td>{{ weapon.user_ssn_number.name }}</td>
+      <td>{{ weapon.serial_number }}</td>
+      <td>{{ weapon.si_type }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<!-- Autocomplete script -->
+<script>
+$( function() {
+  var availableTags = {{ users|safe }};
+  $( "#search" ).autocomplete({
+    source: availableTags
+  });
+} );
+</script>
